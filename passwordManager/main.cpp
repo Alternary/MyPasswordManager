@@ -5,9 +5,45 @@
 #include <fstream>
 #include <termios.h>
 #include <unistd.h>
+#include <json.hpp> //I copy pasted the json.hpp header file from the nlohmann/json project's single_include folder into /usr/include
 
 using namespace std;
 using namespace std::filesystem;
+using json = nlohmann::json;
+
+
+// read a JSON file
+ifstream inputSaveFile("/home/bruh/k/cpps/i/MyPasswordManager/passwordManager/saveFile.json");
+json saveFileJson = json::parse(inputSaveFile);
+void writeSaveFileJsonToFile() {
+  ofstream outputSaveFile("/home/bruh/k/cpps/i/MyPasswordManager/passwordManager/saveFile.json");
+  if (outputSaveFile.is_open()) {
+//    outputSaveFile << setw(4) << saveFileJson << endl; // write prettified JSON to file
+    outputSaveFile << "{ \"strang\": \"strang0\" }";
+    outputSaveFile.close();
+  }
+  else {
+    cout << "Failed to create json file" << endl;
+  }
+}
+
+
+json j = "{ \"happy\": true, \"pi\": 3.141 }"_json;
+float jPi = j["pi"];
+//j["strang"] = "strang"; //can't set json values
+//would need to convert a json into a dict and then a dict into a json
+
+json ex1 = json::parse(R"(
+  {
+    "pi": 3.141,
+    "happy": true
+  }
+)");
+
+json j2 = {
+  {"pi", 3.141},
+  {"happy", true},
+};
 
 class Password {
   public: string username;
@@ -19,15 +55,19 @@ Password defaultPassword = Password{"default_username", "default_password", "def
 
 vector<Password> passwords = {defaultPassword};
 
-path saveDirectoryPath = ".";
-path saveFilePath = saveDirectoryPath / "password_save.txt";
+// path saveDirectoryPath = ".";
+// path saveFilePath = saveDirectoryPath / "password_save.txt";
+path saveFilePath = "/home/bruh/Code/cpps/i/MyPasswordManager/passwordManager/password_save.txt";
 string encryptedPasswords = "";
 //got to use some encryption library to encrypt the password jsons
+//perhaps could use a bash command execution command
 
 void saveEncryptedPasswords() {
   ofstream file(saveFilePath);
   if (file.is_open()) {
+    cout << "writing to file";
     file << encryptedPasswords;
+    //file << "somethang";
     file.close();
   }
   else {
@@ -66,7 +106,13 @@ void dontEchoInput() {
   tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 }
 
+//system("fys running a shell command from c++");
+
 int main() {
+  //cout << saveFileJson["strang"];
+  saveFileJson = "{ \"strang\": \"strang2\" }"_json;
+  writeSaveFileJsonToFile();
+  cout << jPi;
   while (true) {
     cout << endl;
     showPasswords();

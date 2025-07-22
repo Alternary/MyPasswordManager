@@ -1,0 +1,5 @@
+/home/bruh/k/cpps/i/MyPasswordManager/build/CMakeFiles/edit_cache.dir
+/home/bruh/k/cpps/i/MyPasswordManager/build/CMakeFiles/rebuild_cache.dir
+/home/bruh/k/cpps/i/MyPasswordManager/build/passwordManager/CMakeFiles/passwordManager.dir
+/home/bruh/k/cpps/i/MyPasswordManager/build/passwordManager/CMakeFiles/edit_cache.dir
+/home/bruh/k/cpps/i/MyPasswordManager/build/passwordManager/CMakeFiles/rebuild_cache.dir
